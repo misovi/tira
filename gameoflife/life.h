@@ -1,7 +1,7 @@
 const int maxrow = 20, maxcol = 60;    //  grid dimensions
 class Life {
 private:
-  int grid[maxrow + 2][maxcol + 2];  //  allows for two extra rows and columns
+  int grid[maxrow][maxcol];  //  allows for two extra rows and columns
   int neighbor_count(int row, int col);
 public:
   void neighbour_count(int row, int col);
