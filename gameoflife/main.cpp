@@ -17,9 +17,11 @@ Uses: The class Life and its methods initialize(), print(), and update().
    configuration.initialize();
    configuration.print();
    std::cout << "Continue viewing new generations?" << std::endl;
-   while (configuration.user_says_yes()) {
-      configuration.update();
-      configuration.print();
-      std::cout << "Continue viewing new generations? " << std::endl;
+   //std::cout << "DEBUG";
+   while (configuration.user_says_yes())
+   {
+     configuration.update();
+     configuration.print();
+     std::cout << "Continue viewing new generations? " << std::endl;
    }
 }

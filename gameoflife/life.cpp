@@ -13,28 +13,63 @@ Post: The number of living neighbors of the specified cell is returned.
    int i = row;
    int j=col;
    int count = 0;
-   if(i==0 && j==0)
+   int i_limit = 0;
+   int j_limit = 0;
+   if(row==0 && col==0)
    {
-     for (i = row; i <= row + 1; i++)
-        for (j = col; j <= col + 1; j++)
-           count += grid[i][j];  //  Increase the count if neighbor is alive.
-     count -= grid[row][col]; //  Reduce count, since cell is not its own neighbor.
+     i_limit = j_limit = 1;
    }
-   else if(i == maxrow && i == maxcol)
+   else if(row==maxrow-1 && col==maxcol-1)
    {
-     for (i = row - 1; i <= maxrow; i++)
-        for (j = col - 1; j <= maxcol; j++)
-           count += grid[i][j];  //  Increase the count if neighbor is alive.
-     count -= grid[row][col]; //  Reduce count, since cell is not its own neighbor.
+     i = row-1;
+     j = col - 1;
+     i_limit = row;
+     j_limit = col;
    }
+   else if(row == 0)
+   {
+     i = 0;
+     j = col-1;
+     i_limit = 1;
+     j_limit = col+1;
+   }
+   else if(row == maxrow-1)
+   {
+     i = row-1;
+     j = col-1;
+     i_limit = row;
+     j_limit = col+1;
+   }
+   else if(col == 0)
+   {
+     i = row-1;
+     j = 0;
+     i_limit = row + 1;
+     j_limit = 1;
+   }
+   else if(col == maxcol-1)
+   {
+     i = row-1;
+     j = col - 1;
+     i_limit = row+1;
+     j_limit = col;
+   }
+   else
+   {
+     i=row-1;
+     j=col-1;
+     i_limit = row+1;
+     j_limit = col+1;
+   }
+   for (i; i <= i_limit; i++)
+      for (j; j <= j_limit; j++)
+         count += grid[i][j];  //  Increase the count if neighbor is alive.
+   count -= grid[row][col]; //  Reduce count, since cell is not its own neighbor.
+
    /*for (i = row - 1; i <= row + 1; i++)
       for (j = col - 1; j <= col + 1; j++)
          count += grid[i][j];  //  Increase the count if neighbor is alive.
    count -= grid[row][col]; //  Reduce count, since cell is not its own neighbor.*/
-   if(i==0 && j==0)
-   {
-
-   }
    return count;
 }
 
@@ -48,8 +83,8 @@ Post: The Life object contains the next generation of configuration.
    int row, col;
    int new_grid[maxrow][maxcol];
 
-   for (row = 0/*1*/; row <= maxrow; row++)
-      for (col = 0 /*1*/; col <= maxcol; col++)
+   for (row = 0/*1*/; row < maxrow; row++)
+      for (col = 0 /*1*/; col < maxcol; col++)
          switch (neighbor_count(row, col)) {
          case 2:
             new_grid[row][col] = grid[row][col];  //  Status stays the same.
@@ -61,8 +96,8 @@ Post: The Life object contains the next generation of configuration.
             new_grid[row][col] = 0;                //  Cell is now dead.
          }
 
-   for (row = 1; row <= maxrow; row++)
-      for (col = 1; col <= maxcol; col++)
+   for (row = 0; row < maxrow; row++)
+      for (col = 0; col < maxcol; col++)
          grid[row][col] = new_grid[row][col];
 }
 
@@ -83,8 +118,8 @@ EDIT 9.9.2019 15:47 THE USER IS EXPECTED TO INPUT BASED ON 1 START INDEXING
    std::cin >> row >> col;
 
    while (row != -1 || col != -1) {
-      if (row >= 1 && row < maxrow)
-         if (col >= 1 && col < maxcol)
+      if (row >= 1 && row <= maxrow)
+         if (col >= 1 && col <= maxcol)
             grid[row-1][col-1] = 1;
          else
             std::cout << "Column " << col << " is out of range." << std::endl;
@@ -103,8 +138,8 @@ Post: The configuration is written for the user.
 {
    int row, col;
    std::cout << "\nThe current Life configuration is:" << std::endl;
-   for (row = 1; row <= maxrow; row++) {
-      for (col = 1; col <= maxcol; col++)
+   for (row = 0; row < maxrow; row++) {
+      for (col = 0; col < maxcol; col++)
          if (grid[row][col] == 1) std::cout << '*';
          else std::cout << ' ';
       std::cout << std::endl;
@@ -130,6 +165,7 @@ Post: Instructions for using the Life program have been printed.
 
 bool Life::user_says_yes()
 {
+  std::cout << "DEBUG";
    int c;
    bool initial_response = true;
 
