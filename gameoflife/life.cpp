@@ -110,9 +110,18 @@ EDIT 9.9.2019 15:47 THE USER IS EXPECTED TO INPUT BASED ON 1 START INDEXING
 
 {
    int row, col;
-   for (row = 0; row <= maxrow; row++)
+   std::vector<int> column;
+   /*for (row = 0; row <= maxrow; row++)
       for (col = 0; col <= maxcol; col++)
-         grid[row][col] = 0;
+         grid[row][col] = 0;*/
+   for(row = 0; row < maxrow; row++)
+   {
+     for(col = 0; col < maxcol; col++)
+     {
+       column.push_back(0);
+     }
+     grid.push_back(column);
+   }
    std::cout << "List the coordinates for living cells." << std::endl;
    std::cout << "Terminate the list with the special pair -1 -1" << std::endl;
    std::cin >> row >> col;
@@ -182,4 +191,60 @@ bool Life::user_says_yes()
       initial_response = false;
    } while (c != 'y' && c != 'Y' && c != 'n' && c != 'N');
    return (c == 'y' || c == 'Y');
+}
+
+void Life::setUp()
+{
+  int maxw = 70;
+  int maxh = 23;
+  int minh = 6;
+  int minw = 6;
+  int width = 0;
+  int height = 0;
+  std::string inputErr = "Try again! minimum value is " + std::to_string(minw) + " and maximum value is " + std::to_string(maxw);
+  std::cout << "Before we get started, you need to provide some initial info." << std::endl;
+  do {
+    std::cout << "what do you want the width of the game board to be?" << std::endl;
+    try
+    {
+      /*SOMETHING IS HORRIBLY WRONG HERE
+      */
+      std::cout << "DEBUG1" + std::to_string(width);
+      std::cin >> width;
+      if(width>maxw || width < minw)
+      {
+        std::cout << inputErr << std::endl;
+      }
+      else
+      {
+        maxcol=width;
+      }
+    }
+    catch(std::exception e)
+    {
+      width = 0;
+      std::cout << inputErr << std::endl;
+    }
+  } while(width>maxw || width<minw);
+  do {
+    std::cout << "what about the height?" << std::endl;
+    try
+    {
+      std::cout << "DEBUG2" << '\n';
+      std::cin >> height;
+      if(height>maxh || height < minh)
+      {
+        std::cout << inputErr << std::endl;
+      }
+      else
+      {
+        maxrow = height;
+      }
+    }
+    catch(std::exception e)
+    {
+      std::cout << inputErr << std::endl;
+      height = 0;
+    }
+  } while(height>maxh || height<minh);
 }

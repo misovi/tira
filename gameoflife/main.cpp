@@ -13,6 +13,7 @@ Uses: The class Life and its methods initialize(), print(), and update().
 
 {
    Life configuration;
+   configuration.setUp();
    configuration.instructions();
    configuration.initialize();
    configuration.print();
