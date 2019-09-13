@@ -15,4 +15,6 @@ public:
   void update();
   bool user_says_yes();
   void setUp();
+  //readint needs to be moved to a general utility library
+  int readInt();
 };

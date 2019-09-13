@@ -1,5 +1,6 @@
 #include<iostream>
 #include "life.h"
+#include<limits.h>
 
 int Life::neighbor_count(int row, int col)
 /*
@@ -195,6 +196,11 @@ bool Life::user_says_yes()
 
 void Life::setUp()
 {
+  /*
+  Pre:  None.
+  Post: User has inputted the desired play field proportions
+  */
+  //variable definitions
   int maxw = 70;
   int maxh = 23;
   int minh = 6;
@@ -202,6 +208,9 @@ void Life::setUp()
   int width = 0;
   int height = 0;
   std::string inputErr = "Try again! minimum value is " + std::to_string(minw) + " and maximum value is " + std::to_string(maxw);
+
+  //*****************functionality: start************************************
+
   std::cout << "Before we get started, you need to provide some initial info." << std::endl;
   do {
     std::cout << "what do you want the width of the game board to be?" << std::endl;
@@ -209,8 +218,9 @@ void Life::setUp()
     {
       /*SOMETHING IS HORRIBLY WRONG HERE
       */
-      std::cout << "DEBUG1" + std::to_string(width);
-      std::cin >> width;
+      //std::cout << "DEBUG1" + std::to_string(width);
+      //std::cin >> width;
+      width = readInt();
       if(width>maxw || width < minw)
       {
         std::cout << inputErr << std::endl;
@@ -231,7 +241,8 @@ void Life::setUp()
     try
     {
       std::cout << "DEBUG2" << '\n';
-      std::cin >> height;
+      //std::cin >> height;
+      height = readInt();
       if(height>maxh || height < minh)
       {
         std::cout << inputErr << std::endl;
@@ -247,4 +258,33 @@ void Life::setUp()
       height = 0;
     }
   } while(height>maxh || height<minh);
+}
+
+int Life::readInt()
+{
+  std::string str = "";
+  bool inputOK = false;
+  int out = 0;
+  while(!inputOK)
+  {
+    std::cin >> str;
+    try
+    {
+      out = std::stoi(str);
+      inputOK = true;
+    }
+    catch(const std::invalid_argument& e)
+    {
+      std::cout << "Not an integer!" << std::endl;
+    }
+    catch(const std::out_of_range& e)
+    {
+      std::cout << "Inputted number is way too large!" << std::endl;
+    }
+    catch(std::exception& e)
+    {
+      std::cout << "Something went terribly wrong!" << std::endl;
+    }
+  }
+  return out;
 }
