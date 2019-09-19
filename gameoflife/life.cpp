@@ -1,6 +1,7 @@
 #include<iostream>
 #include "life.h"
 #include<limits.h>
+#include<fstream>
 
 int Life::neighbor_count(int row, int col)
 /*
@@ -216,10 +217,7 @@ void Life::setUp()
     std::cout << "what do you want the width of the game board to be?" << std::endl;
     try
     {
-      /*SOMETHING IS HORRIBLY WRONG HERE
-      */
-      //std::cout << "DEBUG1" + std::to_string(width);
-      //std::cin >> width;
+
       width = readInt();
       if(width>maxw || width < minw)
       {
@@ -240,7 +238,7 @@ void Life::setUp()
     std::cout << "what about the height?" << std::endl;
     try
     {
-      std::cout << "DEBUG2" << '\n';
+      //std::cout << "DEBUG2" << '\n';
       //std::cin >> height;
       height = readInt();
       if(height>maxh || height < minh)
@@ -262,6 +260,10 @@ void Life::setUp()
 
 int Life::readInt()
 {
+  /*
+  Pre:  None.
+  Post: User has inputted an integer
+  */
   std::string str = "";
   bool inputOK = false;
   int out = 0;
@@ -287,4 +289,117 @@ int Life::readInt()
     }
   }
   return out;
+}
+
+char Life::readChar()
+{
+  /*
+  Pre:  None.
+  Post: User has inputted a character
+  */
+  std::string str = "";
+  char out = '';
+  while(out == '')
+  {
+    std::cin >> str;
+    if(str.length() == 1)
+    {
+      out = str.at(0);
+    }
+    else
+    {
+      std::cout << "input a single character." << std::endl;
+    }
+  }
+}
+
+char Life::readChar(std::string acceptedChars)
+{
+  /*
+  Pre:  acceptedChars is NOT EMPTY.
+  Post: User has inputted one of the accepted characters
+  */
+  std::string str = "";
+  char out = '';
+  while(out == '')
+  {
+    std::cin >> str;
+    if(str.length() == 1 && characterExists(str.at(0), acceptedChars))
+    {
+      out = str.at(0);
+    }
+    else
+    {
+      std::cout << "wrong character. Input a new one:" << std::endl;
+    }
+  }
+}
+
+bool Life::characterExists(char c, std::string acceptedChars)
+{
+  for(int i = 0; i<acceptedChars.length();i++)
+  {
+    if(acceptedChars.at(i) == c)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+void Life::save()
+{
+  std::fstream save;
+  save.open("sav.txt", std::ios::trunc);
+  for(int i=0;i<maxrow;i++)
+  {
+    for(int j=0;j<maxcol;j++)
+    {
+      save << grid[i][j];
+    }
+    if(i!= maxrow-1)
+    {
+      save << std::endl;
+    }
+  }
+  save.close();
+}
+
+bool Life::load()
+{
+  std::string line;
+  std::fstream save;
+  int live = 0;
+  try
+  {
+    save.open("sav.txt", std::ios::in);
+    grid.clear();
+    std::vector<int> cols;
+    while(std::getline(save, line))
+    {
+      for(int i = 0; i<line.length();i++)
+      {
+        if(line.at(i)==' ')
+        {
+          cols.push_back(0);
+        }
+        else
+        {
+          cols.push_back(1);
+        }
+      }
+      grid.push_back(cols);
+    }
+    maxrow = grid.size();
+    maxcol = grid[0].size();
+    std::cout << "Load succesful. The grid is " << maxrow << " times " << maxcol
+    << " spaces in total, and has" << live << " live cells in it." << std::endl;
+    return true;
+  }
+  catch(std::exception& e)
+  {
+    std::cout << "file not found!";
+    return false;
+  }
+
 }

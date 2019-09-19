@@ -1,4 +1,5 @@
 #include<vector>
+#include<string>
 //const int maxrow = 20, maxcol = 60;    //  grid dimensions
 class Life {
 private:
@@ -17,4 +18,9 @@ public:
   void setUp();
   //readint needs to be moved to a general utility library
   int readInt();
+  bool characterExists(char c, std::string acceptedChars);
+  char readChar(std::string acceptedChars);
+  char readChar();
+  void save();
+  bool load();
 };
