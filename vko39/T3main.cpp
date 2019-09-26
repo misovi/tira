@@ -1,5 +1,6 @@
-typedef char Stack_entry;
 #include"Stack.h"
+
+//make sure Stack.h has typedef char Stack_entry
 
 int main()
 {
@@ -15,10 +16,14 @@ int main()
     storage.push(input.at(i));
   }
 
+  std::cout << "The reversed string: ";
+
   while(!storage.empty())
   {
     storage.top(c);
     std::cout << c;
     storage.pop();
   }
+  std::cout << std::endl;
+  return 0;
 }

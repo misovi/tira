@@ -1,5 +1,3 @@
-typedef double Stack_entry;
-typedef char Stack_entry;
 #include"Stack.h"
 
 Error_code Stack::push(const Stack_entry &item)
@@ -47,10 +45,14 @@ Post: If the Stack is not empty, the top of
 
 {
    Error_code outcome = success;
-   if (count == 0)
-      outcome = underflow;
+   if(count == 0)
+   {
+     outcome = underflow;
+   }
    else
-      item = entry[count - 1];
+   {
+     item = entry[count-1];
+   }
    return outcome;
 }
 
@@ -66,6 +68,21 @@ Post: If the Stack is empty, true is returned.
    bool outcome = true;
    if (count > 0) outcome = false;
    return outcome;
+}
+
+bool Stack::full()
+{
+  return(count==maxstack);
+}
+
+int Stack::size()
+{
+  return count;
+}
+
+void Stack::clear()
+{
+  count = 0;
 }
 
 
