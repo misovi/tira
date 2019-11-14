@@ -8,5 +8,5 @@ struct Node
 
   //constructors
   Node();
-  Node(Node_entry item, Node *add_on= std::NULL);
+  Node(Node_entry item, Node *add_on= NULL);
 };
