@@ -1,6 +1,8 @@
 #include "linkedStack.h"
 Stack::Stack()
 {
+  top_node = NULL;
+  count = 0;
 }
 
 
@@ -14,6 +16,7 @@ Post: Stack_entry item is added to the top of
    Node *new_top = new Node(item, top_node);
    if (new_top == NULL) return overflow;
    top_node = new_top;
+   count++;
    return success;
 }
 
@@ -28,6 +31,7 @@ Post: The top of the Stack is removed.  If the Stack
    if (top_node == NULL) return underflow;
    top_node = old_top->next;
    delete old_top;
+   count--;
    return success;
 }
 
@@ -39,4 +43,25 @@ Error_code Stack::top(Stack_entry& item) const
   }
   item = top_node->entry;
   return success;
+}
+
+int Stack::size()
+{
+  Node *ptr;
+  int i = 0;
+  if(top_node!=NULL)
+  {
+    ptr=top_node;
+    while(ptr!=NULL)
+    {
+      ptr = ptr->next;
+      i++;
+    }
+  }
+  return i;
+}
+
+int Stack::getCount()
+{
+  return count;
 }

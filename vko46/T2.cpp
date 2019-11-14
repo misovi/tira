@@ -38,10 +38,11 @@ int main()
   p0->entry=a;
   p0->next=p1;
   p1->entry=b;
+  p2 = new Node(c,p1);
   p1->next=p2;
-  p2->entry=c;
-  p2->next=p1;
   printChain(p0, 10);
-  delete p1,p2,p0;
+  delete p1;
+  delete p0;
+  delete p2;
   return 0;
 }

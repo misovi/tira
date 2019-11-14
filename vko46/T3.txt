@@ -1,0 +1,1 @@
+Because we cannot assign an item to the top of the stack directly, we have to assign an item into a node and that node goes into the top of the stack
