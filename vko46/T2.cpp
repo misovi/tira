@@ -7,20 +7,16 @@ void printChain(Node *start)
 {
   int i=0;
   Node *head = start;
-  do
+  while(head->next!=NULL)
   {
     std::cout << "Node " << i << std::endl;
     std::cout << "Entry: " << head->entry << std::endl
     << "Next: " << head->next << std::endl << std::endl;
     i++;
-    if(head->next != NULL)
-    {
-      std::cout << "DEBUG";
-      head=head->next;
+    std::cout << "DEBUG";
+    head=head->next;
     }
   }
-  while(start->next!=NULL && i<7);
-}
 
 int main()
 {
