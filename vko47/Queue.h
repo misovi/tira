@@ -12,7 +12,6 @@ public:
   Error_code append(const Queue_entry &item);
   Error_code serve();
   Error_code retrieve(Queue_entry &item) const;
-  bool empty();
   ~Queue ();
   Queue(const Queue &original);
   void operator = (const Queue &original);

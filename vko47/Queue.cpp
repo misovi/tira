@@ -34,8 +34,28 @@ Queue::Queue(const Queue &old)
 
 void Queue::operator = (const Queue &original)
 {
-  Node *newFront;
-  newCopy, origNode, origFront;
+  Node *newFront, *newCopy, *origNode = original.front;
+  Node *newRear = original.rear;
+  if(origNode == NULL)
+  {
+    newFront = NULL;
+  }
+  else
+  {
+    newCopy = newFront = new Node(origNode->entry);
+    while(origNode->next!=NULL)
+    {
+      origNode = origNode->next;
+      newCopy->next = new Node(origNode->entry);
+      newCopy = newCopy->next;
+    }
+    while(!empty())
+    {
+      serve();
+    }
+    front = newFront;
+    rear = newRear;
+  }
 }
 
 Error_code Queue::append(const Queue_entry &item)
