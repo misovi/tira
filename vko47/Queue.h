@@ -1,6 +1,6 @@
 #include "../Utility/Utility.h"
 #include "../vko46/Node.h"
-typedef int Queue_entry;
+typedef Node Queue_entry;
 class Queue
 {
 private:

@@ -5,6 +5,39 @@ Queue::Queue()
   front = rear = NULL;
 }
 
+Queue::~Queue()
+{
+  Queue_entry *executioner = front;
+  Queue_entry *nextOnBlock;
+  while(executioner)
+  {
+    nextOnBlock = executioner->next;
+    delete executioner;
+    executioner = nextOnBlock;
+    //std::cout << "DEBUG" << '\n';
+  }
+}
+
+Queue::Queue(const Queue &old)
+{
+  Queue_entry *entry;
+  old.retrieve(*entry);
+  front = entry;
+  entry=entry->next;
+  while(entry)
+  {
+    append(*entry);
+    rear = entry;
+    entry=entry->next;
+  }
+}
+
+void Queue::operator = (const Queue &original)
+{
+  Node *newFront;
+  newCopy, origNode, origFront;
+}
+
 Error_code Queue::append(const Queue_entry &item)
 /*
 Post: Add item to the rear of the Queue and return a code of success
@@ -35,7 +68,7 @@ Post: The front of the Queue is removed.  If the Queue
    return success;
 }
 
-bool Queue::empty()
+bool Queue::empty() const
 {
   return(front == NULL && rear == NULL);
 }
@@ -48,6 +81,6 @@ Error_code Queue::retrieve(Queue_entry &item) const
   {
     return underflow;
   }
-  item = front->entry;
+  item = *front;
   return success;
 }
