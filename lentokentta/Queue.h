@@ -1,6 +1,6 @@
 #include "../Utility/Utility.h"
 #include "Node.h"
-typedef Node Queue_entry;
+typedef Plane Queue_entry;
 class Queue
 {
 private:
