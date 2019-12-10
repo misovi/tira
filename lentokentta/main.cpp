@@ -86,13 +86,13 @@ Uses: Classes Runway, Plane, Random and functions run_idle, initialize.
       Plane moving_plane;
       switch (small_airport.activity(current_time, moving_plane)) {
         //  Let at most one Plane onto the Runway at current_time.
-      case land:
+      case Runway_activity::land:
          moving_plane.land(current_time);
          break;
-      case takeoff:
+      case Runway_activity::takeoff:
          moving_plane.fly(current_time);
          break;
-      case idle:
+      case Runway_activity::idle:
          run_idle(current_time);
       }
    }

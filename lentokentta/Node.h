@@ -1,4 +1,4 @@
-#include"plane.h"
+#include "plane.h"
 typedef Plane Node_entry;
 #include <iostream>
 struct Node

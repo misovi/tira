@@ -83,7 +83,7 @@ Uses:  class Extended_queue.
       landing.retrieve(moving);
       land_wait += time - moving.started();
       num_landings++;
-      in_progress = land;
+      in_progress = Runway_activity::land;
       landing.serve();
    }
 
@@ -91,13 +91,13 @@ Uses:  class Extended_queue.
       takeoff.retrieve(moving);
       takeoff_wait += time - moving.started();
       num_takeoffs++;
-      in_progress = takeoff;
+      in_progress = Runway_activity::takeoff;
       takeoff.serve();
    }
 
    else {
       idle_time++;
-      in_progress = idle;
+      in_progress = Runway_activity::idle;
    }
    return in_progress;
 }
