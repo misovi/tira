@@ -1,7 +1,6 @@
 #include<iostream>
 #include"runway.h"
 #include"RANDOM.H"
-#include"Utility.h"
 
 void run_idle(int time)
 {

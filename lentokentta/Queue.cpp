@@ -95,6 +95,16 @@ bool Queue::empty() const
 
 //presuming this is supposed to retrieve the item at the front of the
 //queue, so acting on that basis
+Error_code Queue::retrieve(Node_entry &item) const
+{
+  if(empty())
+  {
+    return underflow;
+  }
+  item = front->entry;
+  return success;
+}
+
 Error_code Queue::retrieve(Queue_entry &item) const
 {
   if(empty())

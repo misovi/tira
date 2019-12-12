@@ -81,10 +81,10 @@ Post: Return the time that the Plane entered the airport system.
    return clock_start;
 }
 
-void run_idle(int time)
+//void run_idle(int time)
 /*
 Post: The specified time is printed with a message that the runway is idle.
 */
-{
-   std::cout << time << ": Runway is idle." << std::endl;
-}
+//{
+//   std::cout << time << ": Runway is idle." << std::endl;
+//}

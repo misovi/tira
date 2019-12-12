@@ -1,4 +1,3 @@
-#include"Utility.h"
 #include"Extended_Queue.h"
 enum class Runway_activity {idle, land, takeoff};
 

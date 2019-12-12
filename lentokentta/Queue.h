@@ -1,6 +1,6 @@
-#include "../Utility/Utility.h"
+#include "Utility.h"
 #include "Node.h"
-typedef Plane Queue_entry;
+typedef Node Queue_entry;
 class Queue
 {
 private:
@@ -11,6 +11,7 @@ public:
   bool empty() const;
   Error_code append(const Queue_entry &item);
   Error_code serve();
+  Error_code retrieve(Node_entry &item) const;
   Error_code retrieve(Queue_entry &item) const;
   ~Queue ();
   Queue(const Queue &original);
